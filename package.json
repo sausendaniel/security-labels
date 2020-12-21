@@ -1,0 +1,44 @@
+{
+  "name": "etiquetas-seguranca",
+  "version": "0.1.0",
+  "homepage": "./",
+  "private": true,
+  "dependencies": {
+    "core-js": "^3.8.0",
+    "html2pdf.js": "^0.9.2",
+    "react": "^17.0.1",
+    "react-app-polyfill": "^2.0.0",
+    "react-dom": "^17.0.1",
+    "react-loader-spinner": "^3.1.14",
+    "react-mobile-picker": "^0.1.12",
+    "react-scripts": "4.0.0",
+    "regenerator-runtime": "^0.13.7",
+    "sweetalert2": "^10.11.0",
+    "sweetalert2-react-content": "^3.2.2",
+    "whatwg-fetch": "^3.5.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "ie 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "ie 11"
+    ]
+  }
+}

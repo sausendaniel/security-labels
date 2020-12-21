@@ -1,0 +1,257 @@
+@font-face {
+  font-family: "VWHead-Regular";
+  src: url("../fonts/vwhead-regular.woff2");
+}
+
+@font-face {
+  font-family: "VWText-Regular";
+  src: url("../fonts/vwtext-regular.woff2");
+}
+
+@font-face {
+  font-family: "Gotham-Rounded";
+  src: url("../fonts/GothamRounded-Medium.otf");
+}
+
+:root {
+  --integrator-height-variable: 48px;
+  --body-padding: calc(52px + var(--integrator-height-variable));
+  --vw-gradient: #001e50 radial-gradient(circle at 0% 0%,#00437a 0,#001e50 100%) repeat scroll 0 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.Spinner {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+#root {
+  font-family: "VWHead-Regular";
+  padding-top: var(--body-padding);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App * {
+  transition: 0.2s ease;
+}
+
+.Header *, .Content *, .handlePdf {
+  font-family: "VWHead-Regular";
+}
+
+.Header {
+  width: 100%;
+  height: 560px;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  position: relative;
+}
+
+.Banner {
+  overflow: hidden;
+}
+
+.Banner > div {
+  background: url(../images/banner.webp) 57.5% 50%/cover no-repeat scroll #001e50;
+  height: 100%;
+  width: 100%;
+}
+
+.Banner:hover > div {
+  transform: scale(1.03);
+  transform-origin: 50% 50%;
+}
+
+.Title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #001e50;
+  font-size: 125%;
+  padding: 1em;
+}
+
+.Title > h1 {
+  font-weight: normal;
+  font-family: "VWText-Regular";
+}
+
+.Content {
+  padding: 4em;
+  color: #001e50;
+}
+
+.Content > p, .Year > p {
+  font-size: 150%;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.Year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Year > p {
+  margin-bottom: 0.2em;
+  margin-right: 2em;
+}
+
+div.picker-container {
+  width: initial;
+  z-index: 0;
+}
+
+.picker-item {
+  cursor: pointer;
+}
+
+div.swal2-popup {
+  width: initial;
+  max-width: initial;
+}
+
+#swal2-content {
+  padding: 2rem 2rem 0;
+}
+
+.Vehicles {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.Vehicle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto 2em;
+  text-align: center;
+}
+
+.Vehicle h2 {
+  margin-bottom: 1rem;
+}
+
+.Vehicle img {
+  width: 440px;
+  animation: none;
+}
+
+.Vehicle img.mirror {
+  transform: rotateY(180deg);
+}
+
+.Versions {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.Download {
+  margin: 0.125em 0;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #001e50;
+  text-decoration: none;
+  color: #001e50;
+  font-weight: bold;
+}
+
+.Download:hover {
+  background-color: rgba(194, 202, 207, 0.2);
+}
+
+.Download svg {
+  margin-right: 0.5em;
+}
+
+.Download p {
+  line-height: 1.5;
+  font-size: 0.85em;
+}
+
+@media (max-width: 960px) {
+  :root {
+    --integrator-height-variable: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --integrator-height-variable: 32px;
+  }
+
+  .Header {
+    grid-template-columns: 1fr;
+  }
+
+  .Banner {
+    filter: brightness(0.66);
+  }
+
+  .Title {
+    position: absolute;
+    /* top: 33%; */
+    width: 100%;
+    height: 560px;
+    color: white;
+    text-shadow: 0 0 12px #001e50;
+    font-size: 100%;
+  }
+
+  .Content {
+    padding: 4em 0.5em;
+  }
+
+  .Year {
+    flex-direction: column;
+  }
+
+  .Year > p {
+    margin-right: 0;
+  }
+
+  .Vehicle img {
+    width: 100%;
+  }
+
+  .Versions {
+    width: 95%;
+  }
+
+  div.swal2-popup {
+    transform: scale(0.75);
+  }
+}
+
+@media (min-width: 560px) {
+  .Header {
+    max-height: calc(100vh - var(--body-padding));
+  }
+}

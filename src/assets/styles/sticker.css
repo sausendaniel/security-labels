@@ -1,0 +1,163 @@
+.handlePdf {
+  padding: 0.5em 2em;
+  margin: 2rem 0;
+  background-color: transparent;
+  border: 2px solid #001e50;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.handlePdf:hover {
+  background-color: #001e50;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.Sticker {
+  width: 105mm;
+  display: inline-flex;
+  margin: 16px;
+  /* min-height: 150mm; */
+  height: 150mm;
+  overflow: auto;
+  text-align: initial;
+  font-family: "Gotham-Rounded";
+  color: black;
+  word-break: break-word;
+}
+
+.Sticker p {
+  margin: 0;
+  font-size: 8px;
+}
+
+.outerBorder {
+  border: 2px solid #0E4C89;
+}
+
+.innerBorder {
+  border: 2px solid #71B72C;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.outerBorder, .innerBorder {
+  padding: 12px;
+  border-radius: 12px;
+  height: 100%;
+}
+
+.stickerHead, .stickerItensA > div {
+  display: grid;
+  grid-template-columns: 12fr 4fr;
+}
+
+.stickerHead, .stickerItensA {
+  border-bottom: 1px solid #71B72C;
+}
+
+.stickerHead > * {
+  padding: 0.125rem;
+}
+
+.stickerHead > :first-child {
+  border-right: 1px solid #71B72C;
+}
+
+.stickerYear {
+  display: flex;
+  align-items: center;
+}
+
+.stickerYear h2 {
+  margin: 0;
+  padding: 0.125rem;
+}
+
+div.headItens {
+  grid-column: 1/3;
+  padding: 0;
+  border-bottom: none;
+}
+
+div.headItens p {
+  padding: 0 0.25rem 0.125rem;
+}
+
+div.headItens > div > * {
+  background-color: white;
+}
+
+div.headItens > div:nth-child(even) {
+  background-color: white;
+}
+
+.grupoA h5 {
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+.grupoB > .stickerItensA {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  display: grid;
+  grid-template-columns: 12fr 4fr;
+}
+
+.sectionTitle > :first-child {
+  border-right: 1px solid #71B72C;
+}
+
+.sectionTitle > * {
+  padding-top: 4px;
+}
+
+.stickerItensA > div > :first-child {
+  border-right: 1px solid #71B72C;
+}
+
+.stickerItensA p {
+  padding: 0.0625rem 0.25rem;
+}
+
+.stickerFooter {
+  text-align: center;
+}
+
+.stickerFooter h6 {
+  font-size: 8px;
+  padding: 4px 0;
+}
+
+.credits {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.creditsText {
+  color: #777;
+  display:flex;
+  align-items: flex-end;
+  text-align: initial;
+}
+
+.creditsText p {
+  margin: 0 0.5rem;
+}
+
+.qrCode, .qrCode img {
+  width: 56px;
+  height: 56px;
+}
+
+.generatingPdf .Sticker {
+  min-height: 210mm;
+}
