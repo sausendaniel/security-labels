@@ -3,12 +3,15 @@ import html2pdf from 'html2pdf.js';
 import qrcode from '../assets/images/qr-code.png';
 import icon from '../assets/images/icon.png';
 import '../assets/styles/sticker.css';
+import useFullPageLoader from '../hooks/useFullPageLoader';
 
 const Sticker = ({ mmv }) => {
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   const typeEnums = ["", "Série", "Não disponível", "Não aplicável", "Opcional"];
 
   async function handlePdf() {
+    showLoader();
     const opt = {
       filename: "etiquetas.pdf",
       margin: 16,
@@ -18,10 +21,12 @@ const Sticker = ({ mmv }) => {
     };
     const el = document.querySelector(".Stickers");
     await html2pdf().set(opt).from(el).save();
+    hideLoader();
   }
 
   return (
     <>
+      {loader}
       <button className="handlePdf" onClick={handlePdf}>Baixar PDF</button>
       <div className="Stickers">
         {mmv.map((i, j) => (

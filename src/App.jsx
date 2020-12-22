@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Picker from 'react-mobile-picker';
 import useFullPageLoader from './hooks/useFullPageLoader';
 import Seek from './hooks/Seek';
+import SeekMany from './hooks/SeekMany';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
 import Banner from './components/Banner';
@@ -71,7 +72,7 @@ export default function App() {
   useEffect(() => {
     async function getModels() {
       showLoader();
-      await Seek(`/GetByYear?year=${valueGroups.year}`).then(res => setModels(res));
+      await Seek(`/GetByYear?year=${valueGroups.year}`).then(res => setModels(res.sort((i, j) => i.Modelo.localeCompare(j.Modelo))));
       hideLoader();
     }
     getModels()
@@ -86,11 +87,13 @@ export default function App() {
     e.preventDefault();
     showLoader();
     window.scrollTo(0, 0);
-    let labelData = await Promise.all(mmvCodes.map(i => Seek(`/GetItemsByMMV?codigoMMV=${i}`)));
-    MySwal.fire({
-      html: <Sticker mmv={labelData} />,
-      showCloseButton: true,
-      showConfirmButton: false
+    //let labelData = await Promise.all(mmvCodes.map(i => Seek(`/GetItemsByMMV?codigoMMV=${i}`)));
+    await SeekMany("/GetItemsByMMV?codigoMMV=", mmvCodes).then(res => {
+      MySwal.fire({
+        html: <Sticker mmv={res} />,
+        showCloseButton: true,
+        showConfirmButton: false
+      })
     })
     hideLoader();
   }
