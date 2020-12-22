@@ -72,7 +72,7 @@ export default function App() {
   useEffect(() => {
     async function getModels() {
       showLoader();
-      await Seek(`/GetByYear?year=${valueGroups.year}`).then(res => setModels(res.sort((i, j) => i.Modelo.localeCompare(j.Modelo))));
+      await Seek(`/GetByYear?year=${valueGroups.year}`).then(res => setModels(typeof res === "object" && res.sort((i, j) => i.Modelo.localeCompare(j.Modelo))));
       hideLoader();
     }
     getModels()
