@@ -43,7 +43,7 @@ const Sticker = ({ mmv }) => {
                     </div>
                     <div className="stickerItensA headItens">
                       <div><p>Tipo:</p><p>{i.Tipo}</p></div>
-                      <div><p>Marca:</p><p>Volkswagen</p></div>
+                      <div><p>Marca:</p><p>{i.MMV}</p></div>
                       <div><p>Modelo:</p><p>{i.Modelo}</p></div>
                       <div><p>Versão:</p><p>{i.Versao}</p></div>
                       <div><p>CAT n°:</p><p>{i.Cat}</p></div>
@@ -60,11 +60,13 @@ const Sticker = ({ mmv }) => {
                   <div className="grupoA grupoB">
                     <div className="sectionTitle"><h5>REQUISITOS INOVADORES:</h5><h5>&nbsp;</h5></div>
                     <div className="stickerItensA">
-                    {i.Items.filter(item => item.Descricao.includesOneOf(["Impacto frontal", "Impacto lateral", "Proteção para pedestre"])).map((b, keyB) => (
-                        <div key={keyB}><p>{b.Descricao}</p><p>{typeEnums[b.Disponibilidade]}</p></div>
-                      ))}
+                      {i.Items.filter(item => item.Descricao.includesOneOf(["Impacto frontal", "Impacto lateral", "Proteção para pedestre"])).map((b, keyB) =>
+                        i.Tipo === "Automóvel" && b.Descricao.includes("Impacto frontal") ?
+                        (<div key={keyB}></div>) :
+                        (<div key={keyB}><p>{b.Descricao}</p><p>{typeEnums[b.Disponibilidade]}</p></div>)
+                      )}
                       {i.Items.filter(item => !item.Descricao.includesOneOf(["Impacto frontal", "Impacto lateral", "Proteção para pedestre"])).filter(item => item.Grupo === "B" || item.Grupo === "C").filter(item => item.Disponibilidade === "1" || item.Disponibilidade === "4").map((b, keyB) => (
-                        <div key={keyB}><p>{b.Descricao}</p><p>{typeEnums[b.Disponibilidade]}</p></div>
+                          <div key={keyB}><p>{b.Descricao}</p><p>{typeEnums[b.Disponibilidade]}</p></div>
                       ))}
                     </div>
                   </div>

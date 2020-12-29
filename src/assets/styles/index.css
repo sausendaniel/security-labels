@@ -99,6 +99,15 @@
   font-family: "VWText-Regular";
 }
 
+.Disclaimer {
+  font-size: 0.8rem;
+  color: rgba(128, 128, 128);
+  text-shadow: 0 0 1px white;
+  position: absolute;
+  bottom: 0;
+  padding: 1rem;
+}
+
 .Content {
   padding: 4em;
   color: #001e50;
