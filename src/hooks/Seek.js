@@ -8,7 +8,7 @@ const Seek = async (url) => {
       client_secret: process.env.REACT_APP_TOKEN_SECRET
     }).toString()
   }
-  let { access_token } = await fetch("https://api.qs.volkswagen.com.br/token", tokenOptions).then(res => res.json());
+  let { access_token } = await fetch(process.env.REACT_APP_WEGAS_ENDPOINT, tokenOptions).then(res => res.json());
 
   let response = await fetch(`${process.env.REACT_APP_LABEL_API}${url}`, { headers: { "Authorization": `Bearer ${access_token}` } }).then(res => res.json());
   return response;
