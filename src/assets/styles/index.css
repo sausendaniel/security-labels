@@ -1,3 +1,4 @@
+/* Folha de estilos geral do projeto */
 @font-face {
   font-family: "VWHead-Regular";
   src: url("../fonts/vwhead-regular.woff2");
@@ -13,7 +14,7 @@
   src: url("../fonts/GothamRounded-Medium.otf");
 }
 
-:root {
+:root { /* Regra que define variáveis CSS para espaçamento responsivo do integrator */
   --integrator-height-variable: 48px;
   --body-padding: calc(52px + var(--integrator-height-variable));
   --vw-gradient: #001e50 radial-gradient(circle at 0% 0%,#00437a 0,#001e50 100%) repeat scroll 0 0;
@@ -205,6 +206,7 @@ div.swal2-popup {
   font-size: 0.85em;
 }
 
+/* Media queries para resoluções diferentes e design responsivo */
 @media (max-width: 960px) {
   :root {
     --integrator-height-variable: 40px;

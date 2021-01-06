@@ -1,3 +1,8 @@
+/**
+ * Função helper para requisições async que gera token Wegas e monta URL a partir de variável de ambiente e parâmetro 'url'.
+ * @param   {string}   url - Caminho a ser apendado ao construtor do fetch.
+ * @returns {object[]}     - JSON retorno da requisição.
+ */
 const Seek = async (url) => {
   const tokenOptions = {
     method: "POST",

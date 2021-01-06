@@ -5,11 +5,25 @@ import icon from '../assets/images/icon.png';
 import '../assets/styles/sticker.css';
 import useFullPageLoader from '../hooks/useFullPageLoader';
 
+/**
+ * Componente que recebe lista de retornos e gera lista de etiquetas de segurança para renderização.
+ * @param {object[]} props.mmv - Lista de retornos da API, gerada pela função SeekMany no componente 'App'.
+ */
 const Sticker = ({ mmv }) => {
-  const [loader, showLoader, hideLoader] = useFullPageLoader();
+  const [loader, showLoader, hideLoader] = useFullPageLoader(); // Spinner de tela cheia, visível durante carregamentos.
 
+  /**
+   * Enumerador para disponibilidade de item de segurança. e.g:
+   * typeEnums[2] === "Não disponível"
+   */
   const typeEnums = ["", "Série", "Não disponível", "Não aplicável", "Opcional"];
 
+  /**
+   * Função geradora de PDF utilizando dependência 'html2pdf.js'.
+   * O elemento HTML 'el' é transformado na seguinte ordem: html -> canvas -> imagem -> pdf
+   * A constante 'opt' serve para configurar a função. A propriedade 'opt.pagebreak.after' recebe sintaxe CSS para determinar onde quebrar a página.
+   * '.Sticker:nth-child(even):not(:last-child)' = Todo elemento de classe 'Sticker' par e que não é o último filho do elemento pai (evita última página vazia).
+   */
   async function handlePdf() {
     showLoader();
     const opt = {
@@ -52,6 +66,7 @@ const Sticker = ({ mmv }) => {
                   <div className="grupoA">
                     <div className="sectionTitle"><h5>ITENS:</h5></div>
                     <div className="stickerItensA">
+                      {/* Itens de segurança de grupo A */}
                       {i.Items.filter(item => item.Grupo === "A").map((a, keyA) => (
                         <div key={keyA}><p>{a.Descricao}</p><p>{typeEnums[a.Disponibilidade]}</p></div>
                       ))}
@@ -60,11 +75,13 @@ const Sticker = ({ mmv }) => {
                   <div className="grupoA grupoB">
                     <div className="sectionTitle"><h5>REQUISITOS INOVADORES:</h5><h5>&nbsp;</h5></div>
                     <div className="stickerItensA">
+                      {/* Obrigatoriamente inclui os três itens especificados abaixo, independente de grupo ou disponibilidade */}
                       {i.Items.filter(item => item.Descricao.includesOneOf(["Impacto frontal", "Impacto lateral", "Proteção para pedestre"])).map((b, keyB) =>
                         i.Tipo === "Automóvel" && b.Descricao.includes("Impacto frontal") ?
                         (<div key={keyB}></div>) :
                         (<div key={keyB}><p>{b.Descricao}</p><p>{typeEnums[b.Disponibilidade]}</p></div>)
                       )}
+                      {/* Inversão booleana para incluir todos os itens exceto os especificados abaixo, itens de segurança de grupos B e C */}
                       {i.Items.filter(item => !item.Descricao.includesOneOf(["Impacto frontal", "Impacto lateral", "Proteção para pedestre"])).filter(item => item.Grupo === "B" || item.Grupo === "C").filter(item => item.Disponibilidade === "1" || item.Disponibilidade === "4").map((b, keyB) => (
                           <div key={keyB}><p>{b.Descricao}</p><p>{typeEnums[b.Disponibilidade]}</p></div>
                       ))}

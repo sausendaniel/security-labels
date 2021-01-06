@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Cabeçalho da página, com banner, título, descrição e texto jurídico.
+ */
 const Banner = () => {
   return (
     <div className="Header">

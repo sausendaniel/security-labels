@@ -9,16 +9,19 @@ import Banner from './components/Banner';
 import Sticker from './components/Sticker';
 import Download from './components/icons/Download';
 
+/**
+ * Componente principal, contém cabeçalho, listagem de modelos e Integrator D6 (para header e footer da marca VW).
+ */
 export default function App() {
 
-  const [valid, setValid] = useState(false);
-  const [loader, showLoader, hideLoader] = useFullPageLoader();
+  const [valid, setValid] = useState(false); // Chave que determina visibilidade da página.
+  const [loader, showLoader, hideLoader] = useFullPageLoader(); // Spinner de tela cheia, visível durante carregamentos.
 
-  const [valueGroups, setValueGroups] = useState({ year: 2021 });
-  const optionGroups = { year: [2020, 2021, 2022, 2023] };
+  const [valueGroups, setValueGroups] = useState({ year: 2021 }); // Model year selecionado.
+  const optionGroups = { year: [2020, 2021, 2022, 2023] }; // Lista de anos (model year) disponíveis.
 
-  const [models, setModels] = useState([]);
-  const modelEnums = [
+  const [models, setModels] = useState([]); // Lista de modelos para o model year selecionado.
+  const modelEnums = [ // Enumerador de modelos, para nome e imagem apresentados.
     { displayName: "Amarok", name: "AMAROK", image: require("./assets/images/amarok.png").default },
     { displayName: "Fox", name: "FOX", image: require("./assets/images/fox.webp").default },
     { displayName: "Gol", name: "GOL", image: require("./assets/images/gol.webp").default },
@@ -35,10 +38,10 @@ export default function App() {
     { displayName: "Voyage", name: "VOYAGE", image: require("./assets/images/voyage.webp").default },
   ]
 
-  const MySwal = withReactContent(Swal);
+  const MySwal = withReactContent(Swal); // Instância de SweetAlert2 para pop-up.
 
   useEffect(() => {
-    async function getIntegrator() {
+    async function getIntegrator() { // Função que busca Integrator VW e inclui na página.
       try {
         // Busca template do Integrator e JSON de configuração
         let endpoints = [
@@ -70,7 +73,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    async function getModels() {
+    async function getModels() { // Função que busca modelos para o model year selecionado. Executada toda vez que o valor de 'valueGroups' muda.
       showLoader();
       await Seek(`/GetByYear?year=${valueGroups.year}`).then(res => setModels(typeof res === "object" && res.sort((i, j) => i.Modelo.localeCompare(j.Modelo))));
       hideLoader();
@@ -79,17 +82,21 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueGroups])
 
-  function handleChange(name, value) {
+  function handleChange(name, value) { // Função que trata mudança do model year selecionado.
     setValueGroups({ [name]: value })
   }
 
+  /**
+   * Função que mostra spinner de tela cheia, chama SeekMany para retornar dados da API e abre modal/pop-up com etiquetas de segurança.
+   * @param {HTMLAnchorElement} e        - Elemento HTML em foco, referenciado apenas para evitar comportamento padrão.
+   * @param {string[]}          mmvCodes - Lista de códigos MMV para iteração e requisição dos dados da etiqueta de segurança em questão.
+   */
   async function handleMMV(e, mmvCodes) {
     e.preventDefault();
     showLoader();
-    window.scrollTo(0, 0);
-    //let labelData = await Promise.all(mmvCodes.map(i => Seek(`/GetItemsByMMV?codigoMMV=${i}`)));
+    window.scrollTo(0, 0); // Volta para o topo da página devido a incompatibilidades com gerador de PDF.
     await SeekMany("/GetItemsByMMV?codigoMMV=", mmvCodes).then(res => {
-      MySwal.fire({
+      MySwal.fire({ // Chama pop-up SweetAlert2 com etiquetas de segurança geradas a partir do retorno de SeekMany.
         html: <Sticker mmv={res} />,
         showCloseButton: true,
         showConfirmButton: false
@@ -105,7 +112,7 @@ export default function App() {
           <div className="Content">
             <div className="Year">
               <p>Escolha o ano do seu modelo</p>
-              <Picker
+              <Picker // Seletor de model year
                 optionGroups={optionGroups}
                 valueGroups={valueGroups}
                 onChange={handleChange}

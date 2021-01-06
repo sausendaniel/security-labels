@@ -1,5 +1,11 @@
+/**
+ * Função helper específica para criação de etiquetas, que gera token Wegas e monta URL a partir de variável de ambiente e parâmetros 'url' e 'arr'.
+ * O parâmetro 'arr' é iterado e cada item na lista gera uma requisição.
+ * @param   {string}   url - Caminho a ser apendado ao construtor do fetch.
+ * @param   {string[]} arr - Lista cuja iteração é apendada à URL do fetch.
+ * @returns {object[]}     - JSON retorno da requisição.
+ */
 const SeekMany = async (url, arr) => {
-
   const tokenOptions = {
     method: "POST",
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
