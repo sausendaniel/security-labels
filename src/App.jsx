@@ -18,7 +18,7 @@ export default function App() {
   const [loader, showLoader, hideLoader] = useFullPageLoader(); // Spinner de tela cheia, visível durante carregamentos.
 
   const [valueGroups, setValueGroups] = useState({ year: 2021 }); // Model year selecionado.
-  const optionGroups = { year: [2020, 2021, 2022, 2023] }; // Lista de anos (model year) disponíveis.
+  const optionGroups = { year: [2021, 2022, 2023] }; // Lista de anos (model year) disponíveis.
 
   const [models, setModels] = useState([]); // Lista de modelos para o model year selecionado.
   const modelEnums = [ // Enumerador de modelos, para nome e imagem apresentados.
@@ -29,7 +29,7 @@ export default function App() {
     { displayName: "Nivus", name: "NIVUS", image: require("./assets/images/nivus.webp").default },
     { displayName: "Jetta", name: "JETTA", image: require("./assets/images/novo-jetta.webp").default },
     { displayName: "Polo", name: "POLO", image: require("./assets/images/polo.webp").default },
-    { displayName: "Nova Saveiro", name: "NOVA SAVEIRO", image: require("./assets/images/saveiro.webp").default },
+    { displayName: "Nova Saveiro", name: "NOVA SAVEIRO", image: require("./assets/images/nova_saveiro.png").default },
     { displayName: "Saveiro", name: "SAVEIRO", image: require("./assets/images/saveiro.webp").default },
     { displayName: "T-Cross", name: "T CROSS", image: require("./assets/images/t-cross.webp").default },
     { displayName: "Tiguan", name: "TIGUAN", image: require("./assets/images/tiguan-allspace.webp").default },
